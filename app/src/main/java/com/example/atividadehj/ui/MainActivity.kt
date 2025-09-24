@@ -1,30 +1,44 @@
 package com.example.atividadehj.ui
 
 import android.os.Bundle
-import com.example.atividadehj.R
 import androidx.appcompat.app.AppCompatActivity
-import com.example.atividadehj.databinding.ActivityMainBinding
+import androidx.fragment.app.Fragment
+import com.example.atividadehj.R
+import com.example.atividadehj.ui.ProductListFragment
+import com.example.atividadehj.ui.UserListFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-        binding.btnUsers.setOnClickListener {
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
+
+        // Fragment inicial (Home -> lista de produtos, por exemplo)
+        if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, UserListFragment())
-                .addToBackStack(null)
+                .replace(R.id.fragment_container, ProductListFragment())
                 .commit()
         }
 
-        binding.btnProducts.setOnClickListener {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ProductListFragment())
-                .addToBackStack(null)
-                .commit()
+        bottomNav.setOnItemSelectedListener { item ->
+            var selectedFragment: Fragment? = null
+
+            when (item.itemId) {
+                R.id.nav_home -> selectedFragment = ProductListFragment() // ou outro fragment de "home"
+                R.id.nav_products -> selectedFragment = ProductListFragment()
+                R.id.nav_users -> selectedFragment = UserListFragment()
+            }
+
+            selectedFragment?.let {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, it)
+                    .commit()
+            }
+
+            true
         }
     }
 }

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.atividadehj.data.AppDatabase
-import com.example.atividadehj.data.Product
+import com.example.atividadehj.model.Product
 import com.example.atividadehj.databinding.FragmentFormProductBinding
 import kotlinx.coroutines.launch
 
