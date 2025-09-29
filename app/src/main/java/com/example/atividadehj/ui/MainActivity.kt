@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.atividadehj.R
-import com.example.atividadehj.ui.ProductListFragment
-import com.example.atividadehj.ui.UserListFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -16,29 +14,27 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
 
-        // Fragment inicial (Home -> lista de produtos, por exemplo)
+        // Fragmento inicial
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ProductListFragment())
-                .commit()
+            replaceFragment(ProductListFragment())
         }
 
+        // Navegação entre fragments
         bottomNav.setOnItemSelectedListener { item ->
-            var selectedFragment: Fragment? = null
-
-            when (item.itemId) {
-                R.id.nav_home -> selectedFragment = ProductListFragment() // ou outro fragment de "home"
-                R.id.nav_products -> selectedFragment = ProductListFragment()
-                R.id.nav_users -> selectedFragment = UserListFragment()
+            val fragment: Fragment = when (item.itemId) {
+                R.id.nav_home -> ProductListFragment()
+                R.id.nav_products -> ProductListFragment()
+                R.id.nav_users -> UserListFragment()
+                else -> ProductListFragment()
             }
-
-            selectedFragment?.let {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, it)
-                    .commit()
-            }
-
+            replaceFragment(fragment)
             true
         }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
     }
 }
