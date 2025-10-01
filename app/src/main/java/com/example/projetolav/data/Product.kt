@@ -1,4 +1,4 @@
-package com.example.atividadehj.model
+package com.example.projetolav.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

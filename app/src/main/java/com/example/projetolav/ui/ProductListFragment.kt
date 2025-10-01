@@ -1,4 +1,4 @@
-package com.example.atividadehj.ui
+package com.example.projetolav.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.example.atividadehj.R
+import com.example.projetolav.R
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.atividadehj.data.AppDatabase
-import com.example.atividadehj.databinding.FragmentListBinding
+import com.example.projetolav.data.AppDatabase
+import com.example.projetolav.databinding.FragmentListBinding
 import kotlinx.coroutines.launch
 
-class UserListFragment : Fragment() {
+class ProductListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
 
@@ -25,7 +25,7 @@ class UserListFragment : Fragment() {
 
         binding.btnAdd.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, UserFormFragment())
+                .replace(R.id.fragment_container, ProductFormFragment())
                 .addToBackStack(null)
                 .commit()
         }
@@ -37,8 +37,8 @@ class UserListFragment : Fragment() {
     private fun loadData() {
         val db = AppDatabase.getDatabase(requireContext())
         lifecycleScope.launch {
-            val users = db.userDao().getAll()
-            binding.recyclerView.adapter = SimpleAdapter(users.map { it.name })
+            val products = db.productDao().getAll()
+            binding.recyclerView.adapter = SimpleAdapter(products.map { it.name })
         }
     }
 

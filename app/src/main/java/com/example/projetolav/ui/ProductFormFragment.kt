@@ -1,4 +1,4 @@
-package com.example.atividadehj.ui
+package com.example.projetolav.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,27 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.example.atividadehj.data.AppDatabase
-import com.example.atividadehj.model.User
-import com.example.atividadehj.databinding.FragmentFormUserBinding
+import com.example.projetolav.data.AppDatabase
+import com.example.projetolav.model.Product
+import com.example.projetolav.databinding.FragmentFormProductBinding
 import kotlinx.coroutines.launch
 
-class UserFormFragment : Fragment() {
-    private var _binding: FragmentFormUserBinding? = null
+class ProductFormFragment : Fragment() {
+    private var _binding: FragmentFormProductBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFormUserBinding.inflate(inflater, container, false)
+        _binding = FragmentFormProductBinding.inflate(inflater, container, false)
 
         binding.btnSave.setOnClickListener {
             val name = binding.etName.text.toString()
-            val email = binding.etEmail.text.toString()
+            val price = binding.etPrice.text.toString().toDoubleOrNull() ?: 0.0
 
             val db = AppDatabase.getDatabase(requireContext())
             lifecycleScope.launch {
-                db.userDao().insert(User(name = name, email = email))
+                db.productDao().insert(Product(name = name, price = price))
                 parentFragmentManager.popBackStack()
             }
         }

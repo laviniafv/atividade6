@@ -1,11 +1,11 @@
-package com.example.atividadehj.data
+package com.example.projetolav.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "users")
-data class User(
+@Entity(tableName = "products")
+data class Product(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val name: String,
-    val email: String
+    val price: Double
 )

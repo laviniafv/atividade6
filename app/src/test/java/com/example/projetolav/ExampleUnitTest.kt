@@ -1,4 +1,4 @@
-package com.example.atividadehj
+package com.example.projetolav
 
 import org.junit.Test
 

@@ -1,9 +1,9 @@
-package com.example.atividadehj.data
+package com.example.projetolav.data
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.atividadehj.model.Product
+import com.example.projetolav.model.Product
 
 @Dao
 interface ProductDao {

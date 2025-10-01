@@ -1,9 +1,9 @@
-package com.example.atividadehj.ui
+package com.example.projetolav.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.atividadehj.databinding.ItemSimpleBinding
+import com.example.projetolav.databinding.ItemSimpleBinding
 
 class SimpleAdapter(private val items: List<String>) : RecyclerView.Adapter<SimpleAdapter.ViewHolder>() {
 
